@@ -33,6 +33,9 @@ Concretely:
 6. Keep it minimal: one component concept per file, real states
    (hover/focus/disabled/active), and `prefers-reduced-motion` respected
    (handled globally in tokens.css).
+7. Include the demo chrome: FOUC theme script in `<head>`, a top
+   `ak-demo-bar` with Gallery + `#theme-btn`, and load
+   `../assets/theme.js` after `icons.js` so light/dark matches the gallery.
 
 ## Folder layout
 

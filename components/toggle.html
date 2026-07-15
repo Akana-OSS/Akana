@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("akana-theme");
+        if (t === "light" || t === "dark") {
+          document.documentElement.setAttribute("data-theme", t);
+        }
+      } catch (e) {}
+    })();
+  </script>
   <title>Akana · Toggle</title>
   <link rel="stylesheet" href="../assets/fonts.css">
   <link rel="stylesheet" href="../assets/tokens.css">
@@ -10,6 +21,15 @@
 </head>
 <body class="akana">
   <main class="ak-demo">
+    <div class="ak-demo-bar">
+      <a class="ak-btn ak-btn--secondary ak-btn--sm" href="../index.html">
+        <span class="ak-icon" data-icon="arrow-left"></span> Gallery
+      </a>
+      <button class="ak-btn ak-btn--secondary ak-btn--sm" id="theme-btn" type="button" aria-pressed="false">
+        <span class="ak-icon" data-icon="moon"></span> Dark
+      </button>
+    </div>
+
     <span class="ak-label">Component</span>
     <h1>Toggle</h1>
     <p class="lead">A binary on/off control. Built on the native checkbox with <code>role="switch"</code> so screen readers announce it correctly. State comes from the thumb sliding — no color.</p>
@@ -34,9 +54,9 @@
       </label>
     </div>
   </main>
-
   <script src="../assets/icons.js"></script>
-  <script>
+  <script src="../assets/theme.js"></script>
+<script>
     // Keep aria-checked in sync with the native checkbox state.
     document.querySelectorAll('.ak-toggle input').forEach(function (el) {
       var sync = function () { el.setAttribute('aria-checked', el.checked ? 'true' : 'false'); };

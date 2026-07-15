@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("akana-theme");
+        if (t === "light" || t === "dark") {
+          document.documentElement.setAttribute("data-theme", t);
+        }
+      } catch (e) {}
+    })();
+  </script>
   <title>Akana · Button</title>
   <link rel="stylesheet" href="../assets/fonts.css">
   <link rel="stylesheet" href="../assets/tokens.css">
@@ -10,6 +21,15 @@
 </head>
 <body class="akana">
   <main class="ak-demo">
+    <div class="ak-demo-bar">
+      <a class="ak-btn ak-btn--secondary ak-btn--sm" href="../index.html">
+        <span class="ak-icon" data-icon="arrow-left"></span> Gallery
+      </a>
+      <button class="ak-btn ak-btn--secondary ak-btn--sm" id="theme-btn" type="button" aria-pressed="false">
+        <span class="ak-icon" data-icon="moon"></span> Dark
+      </button>
+    </div>
+
     <span class="ak-label">Component</span>
     <h1>Button</h1>
     <p class="lead">Primary action in ink. Secondary and ghost variants keep weight off the page. Icons sit inline with the label.</p>
@@ -54,5 +74,6 @@
     </div>
   </main>
   <script src="../assets/icons.js"></script>
+  <script src="../assets/theme.js"></script>
 </body>
 </html>
