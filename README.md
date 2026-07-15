@@ -22,7 +22,7 @@ arayüzün sade mürekkep-kâğıt diliyle bilinçli hizalı.
 ## Structure
 
 ```
-Akana/               # product name; local folder may still be Kern until rename
+Akana/
   DESIGN.md          # formal token spec (machine-readable, linted)
   AGENTS.md          # how other agents consume / extend this system
   FONTS.md           # font licenses & attribution
