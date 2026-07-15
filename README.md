@@ -9,12 +9,11 @@ runs fully offline — just open a file in a browser.
 
 ## What's inside
 
-- **3 bundled font families** (woff2, offline): Space Grotesk (display),
-  Inter (UI), JetBrains Mono (labels/meta). Latin + Latin-ext, so Turkish and
-  other extended characters render.
+- **IBM Plex** (woff2, offline): Plex Sans (display + UI) and Plex Mono
+  (labels/meta). SIL OFL 1.1, single steward, latin + latin-ext. See `FONTS.md`.
 - **A monochrome token set** — single ink ramp, neutral surfaces, light + dark.
 - **An inline SVG icon set** (no image files) — `assets/icons.js`.
-- **5 standalone components**, one per file in `components/`, each runnable alone.
+- **14 standalone components**, one per file in `components/`, each runnable alone.
 
 ## Structure
 
@@ -22,21 +21,18 @@ runs fully offline — just open a file in a browser.
 Kern/
   DESIGN.md          # formal token spec (machine-readable, linted)
   AGENTS.md          # how other agents consume / extend this system
+  FONTS.md           # font licenses & attribution
   README.md          # this file
   index.html         # gallery / showcase (theme toggle)
   about.html         # the system's parts, explained
+  docs/              # research notes
   assets/
-    fonts/           # bundled .woff2 (offline)
+    fonts/           # bundled .woff2 + OFL-IBM-Plex.txt
     fonts.css        # @font-face (local)
     tokens.css       # colors, type scale, spacing, radii, motion
     components.css   # shared component styles
     icons.js         # inline SVG icon set + kern.icon() / kern.mount()
   components/         # ONE simple component per file, standalone + runnable
-    button.html
-    card.html
-    input.html
-    badge.html
-    nav.html
   scripts/
     download_fonts.py  # re-bundle fonts if needed
     check_icons.js     # verify every used icon exists
@@ -66,3 +62,4 @@ See `AGENTS.md`. The rule in brief:
 - `DESIGN.md` passes Google's `@google/design.md` lint.
 - `icons.js` passes `node --check`; every icon used is defined.
 - Gallery renders with zero console / JS errors.
+- Fonts ship with `assets/fonts/OFL-IBM-Plex.txt`.

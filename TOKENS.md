@@ -78,8 +78,8 @@ never place text on pure `--ink`/`--gray-950` without the inverse token.
 | `--fs-3xl` | `clamp(26px, 1.042vw + 22.667px, 36px)` | 36px (h1) |
 | `--fs-4xl` | `clamp(32px, 1.667vw + 26.667px, 48px)` | 48px (display) |
 
-Families: `--font-display` Space Grotesk · `--font-ui` Inter ·
-`--font-mono` JetBrains Mono. Mono labels: `≥11px`, tracking `0.06em`, uppercase.
+Families: `--font-display` / `--font-ui` IBM Plex Sans ·
+`--font-mono` IBM Plex Mono (SIL OFL 1.1 — see `FONTS.md`). Mono labels: `≥11px`, tracking `0.06em`, uppercase.
 
 ## Spacing · Radii · Motion
 

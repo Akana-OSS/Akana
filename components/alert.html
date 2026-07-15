@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kern · Alert</title>
+  <link rel="stylesheet" href="../assets/fonts.css">
+  <link rel="stylesheet" href="../assets/tokens.css">
+  <link rel="stylesheet" href="../assets/components.css">
+</head>
+<body class="kern">
+  <main class="k-demo">
+    <span class="k-label">Component</span>
+    <h1>Alert</h1>
+    <p class="lead">Feedback without hue. Default is a quiet surface; strong adds a left ink rail; solid inverts for one critical message. Icons assist scanning — text carries the meaning.</p>
+
+    <div class="k-stack" style="max-width: 560px;">
+      <div class="k-alert" role="status">
+        <span class="k-alert__icon k-icon" data-icon="info"></span>
+        <div class="k-alert__body">
+          <p class="k-alert__title">Draft saved</p>
+          <p class="k-alert__text">Your changes are stored locally. Publish when ready.</p>
+        </div>
+      </div>
+
+      <div class="k-alert k-alert--strong" role="status">
+        <span class="k-alert__icon k-icon" data-icon="warning"></span>
+        <div class="k-alert__body">
+          <p class="k-alert__title">Action required</p>
+          <p class="k-alert__text">Two fields need attention before this form can submit.</p>
+        </div>
+      </div>
+
+      <div class="k-alert k-alert--solid" role="alert">
+        <span class="k-alert__icon k-icon" data-icon="warning"></span>
+        <div class="k-alert__body">
+          <p class="k-alert__title">Service interruption</p>
+          <p class="k-alert__text">Writes are paused. Reads remain available. Retry in a few minutes.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="../assets/icons.js"></script>
+</body>
+</html>

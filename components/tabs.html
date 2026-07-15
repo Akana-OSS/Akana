@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kern · Tabs</title>
+  <link rel="stylesheet" href="../assets/fonts.css">
+  <link rel="stylesheet" href="../assets/tokens.css">
+  <link rel="stylesheet" href="../assets/components.css">
+</head>
+<body class="kern">
+  <main class="k-demo">
+    <span class="k-label">Component</span>
+    <h1>Tabs</h1>
+    <p class="lead">In-page navigation. Active tab is an ink underline — not a color chip. Keyboard: Left/Right to move, Home/End, Enter/Space to activate.</p>
+
+    <div class="k-tabs" id="demo-tabs">
+      <div class="k-tabs__list" role="tablist" aria-label="Overview sections">
+        <button class="k-tabs__tab" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true" type="button">
+          <span class="k-icon" data-icon="document" data-size="16"></span> Overview
+        </button>
+        <button class="k-tabs__tab" role="tab" id="tab-activity" aria-controls="panel-activity" aria-selected="false" tabindex="-1" type="button">
+          <span class="k-icon" data-icon="clock" data-size="16"></span> Activity
+        </button>
+        <button class="k-tabs__tab" role="tab" id="tab-settings" aria-controls="panel-settings" aria-selected="false" tabindex="-1" type="button">
+          <span class="k-icon" data-icon="settings" data-size="16"></span> Settings
+        </button>
+      </div>
+      <div class="k-tabs__panel" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" tabindex="0">
+        Project summary and status. Hierarchy comes from type — the tab strip only indicates which pane is open.
+      </div>
+      <div class="k-tabs__panel" role="tabpanel" id="panel-activity" aria-labelledby="tab-activity" tabindex="0" hidden>
+        Recent events, commits, and comments. Empty activity should prefer an empty-state pattern, not color.
+      </div>
+      <div class="k-tabs__panel" role="tabpanel" id="panel-settings" aria-labelledby="tab-settings" tabindex="0" hidden>
+        Preferences that affect this view only. Destructive actions still use primary/secondary buttons, not red.
+      </div>
+    </div>
+  </main>
+  <script src="../assets/icons.js"></script>
+  <script>
+    (function () {
+      var root = document.getElementById('demo-tabs');
+      var tabs = Array.prototype.slice.call(root.querySelectorAll('[role="tab"]'));
+      var panels = Array.prototype.slice.call(root.querySelectorAll('[role="tabpanel"]'));
+
+      function activate(tab) {
+        tabs.forEach(function (t) {
+          var on = t === tab;
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+          t.tabIndex = on ? 0 : -1;
+        });
+        panels.forEach(function (p) {
+          var show = p.id === tab.getAttribute('aria-controls');
+          if (show) p.removeAttribute('hidden');
+          else p.setAttribute('hidden', '');
+        });
+      }
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () { activate(tab); });
+        tab.addEventListener('keydown', function (e) {
+          var i = tabs.indexOf(tab);
+          var next = null;
+          if (e.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
+          else if (e.key === 'ArrowLeft') next = tabs[(i - 1 + tabs.length) % tabs.length];
+          else if (e.key === 'Home') next = tabs[0];
+          else if (e.key === 'End') next = tabs[tabs.length - 1];
+          else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(tab); return; }
+          if (next) { e.preventDefault(); next.focus(); activate(next); }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

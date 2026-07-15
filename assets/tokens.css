@@ -24,10 +24,12 @@
   --gray-900: #141414;
   --gray-950: #0a0a0a;
 
-  /* Type families */
-  --font-display: "Space Grotesk", system-ui, sans-serif;
-  --font-ui: "Inter", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* Type families — IBM Plex (SIL OFL 1.1, single steward).
+       Display + UI share Plex Sans (weight carries hierarchy);
+       labels/meta use Plex Mono. See assets/fonts/ and FONTS.md. */
+    --font-display: "IBM Plex Sans", system-ui, sans-serif;
+    --font-ui: "IBM Plex Sans", system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
   /* Type scale — FLUID (clamp). MIN@320px … MAX@1280px.
      Desktop (1280px) matches the original fixed px targets. */

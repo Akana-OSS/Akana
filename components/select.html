@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kern · Select</title>
+  <link rel="stylesheet" href="../assets/fonts.css">
+  <link rel="stylesheet" href="../assets/tokens.css">
+  <link rel="stylesheet" href="../assets/components.css">
+</head>
+<body class="kern">
+  <main class="k-demo">
+    <span class="k-label">Component</span>
+    <h1>Select</h1>
+    <p class="lead">Native <code>&lt;select&gt;</code> with a monochrome chevron. Focus ring matches input fields. Prefer native over custom menus for accessibility and progressive enhancement.</p>
+
+    <div class="k-stack" style="max-width: 420px;">
+      <div class="k-field">
+        <label class="k-field__label" for="ex-region">Region</label>
+        <div class="k-select-wrap">
+          <select id="ex-region" class="k-select">
+            <option value="">Choose a region…</option>
+            <option>Europe</option>
+            <option selected>Middle East</option>
+            <option>Americas</option>
+            <option>Asia Pacific</option>
+          </select>
+          <span class="k-select__chevron k-icon" data-icon="chevron-down" data-size="18"></span>
+        </div>
+        <span class="k-field__help">Used for latency-sensitive endpoints.</span>
+      </div>
+
+      <div class="k-field k-field--error">
+        <label class="k-field__label" for="ex-role">Role</label>
+        <div class="k-select-wrap">
+          <select id="ex-role" class="k-select">
+            <option value="">Select a role…</option>
+            <option>Viewer</option>
+            <option>Editor</option>
+            <option>Admin</option>
+          </select>
+          <span class="k-select__chevron k-icon" data-icon="chevron-down" data-size="18"></span>
+        </div>
+        <span class="k-field__help">A role is required to continue.</span>
+      </div>
+
+      <div class="k-field">
+        <label class="k-field__label" for="ex-disabled">Disabled</label>
+        <div class="k-select-wrap">
+          <select id="ex-disabled" class="k-select" disabled>
+            <option>Locked choice</option>
+          </select>
+          <span class="k-select__chevron k-icon" data-icon="chevron-down" data-size="18"></span>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="../assets/icons.js"></script>
+</body>
+</html>

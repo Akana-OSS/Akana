@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kern · Textarea</title>
+  <link rel="stylesheet" href="../assets/fonts.css">
+  <link rel="stylesheet" href="../assets/tokens.css">
+  <link rel="stylesheet" href="../assets/components.css">
+</head>
+<body class="kern">
+  <main class="k-demo">
+    <span class="k-label">Component</span>
+    <h1>Textarea</h1>
+    <p class="lead">Multi-line text, same border and focus language as input. Error state stays monochrome — stronger border, clearer helper.</p>
+
+    <div class="k-stack" style="max-width: 480px;">
+      <div class="k-field">
+        <label class="k-field__label" for="ex-bio">Bio</label>
+        <textarea id="ex-bio" class="k-textarea" rows="5" placeholder="A short description…"></textarea>
+        <span class="k-field__help">Max 280 characters. Plain text only.</span>
+      </div>
+
+      <div class="k-field k-field--error">
+        <label class="k-field__label" for="ex-note">Release notes</label>
+        <textarea id="ex-note" class="k-textarea" rows="4">Missing required summary.</textarea>
+        <span class="k-field__help">Add at least one complete sentence.</span>
+      </div>
+    </div>
+  </main>
+  <script src="../assets/icons.js"></script>
+</body>
+</html>

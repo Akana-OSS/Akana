@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kern · Checkbox</title>
+  <link rel="stylesheet" href="../assets/fonts.css">
+  <link rel="stylesheet" href="../assets/tokens.css">
+  <link rel="stylesheet" href="../assets/components.css">
+</head>
+<body class="kern">
+  <main class="k-demo">
+    <span class="k-label">Component</span>
+    <h1>Checkbox</h1>
+    <p class="lead">Binary multi-select. Checked state is ink fill + check icon — no hue. Works with native <code>&lt;input type="checkbox"&gt;</code> for progressive enhancement.</p>
+
+    <div class="k-stack" style="max-width: 420px;">
+      <section>
+        <div class="k-section-title">Default</div>
+        <div class="k-choice-group">
+          <label class="k-choice">
+            <input type="checkbox" checked>
+            <span class="k-choice__box"><span class="k-icon" data-icon="check" data-size="12"></span></span>
+            <span class="k-choice__text">Email digests
+              <span class="k-choice__hint">Weekly summary of activity.</span>
+            </span>
+          </label>
+          <label class="k-choice">
+            <input type="checkbox">
+            <span class="k-choice__box"><span class="k-icon" data-icon="check" data-size="12"></span></span>
+            <span class="k-choice__text">Product updates</span>
+          </label>
+          <label class="k-choice">
+            <input type="checkbox" disabled>
+            <span class="k-choice__box"><span class="k-icon" data-icon="check" data-size="12"></span></span>
+            <span class="k-choice__text">Legacy channel (disabled)</span>
+          </label>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="../assets/icons.js"></script>
+</body>
+</html>

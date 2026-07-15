@@ -3,17 +3,24 @@ import urllib.request, re, os
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
 
-ROOT = r"C:\Users\alptekin\Projeler\Kern"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "assets", "fonts")
 os.makedirs(OUT, exist_ok=True)
 
+# Single steward (IBM): Plex Sans for display+UI, Plex Mono for labels.
+# SIL OFL 1.1 with Reserved Font Name "Plex" — license ships in assets/fonts/.
 families = {
-    "SpaceGrotesk": "Space+Grotesk:wght@500;700",
-    "Inter": "Inter:wght@400;500;600",
-    "JetBrainsMono": "JetBrains+Mono:wght@400;500",
+    "IBMPlexSans": "IBM+Plex+Sans:wght@400;500;600;700",
+    "IBMPlexMono": "IBM+Plex+Mono:wght@400;500",
 }
 want = {"latin", "latin-ext"}
 faces = []
+
+# Remove old non-Plex woff2 so the bundle stays clean
+for name in os.listdir(OUT):
+    if name.endswith(".woff2") and not name.startswith("IBMPlex"):
+        os.remove(os.path.join(OUT, name))
+        print("removed", name)
 
 for _key, spec in families.items():
     url = f"https://fonts.googleapis.com/css2?family={spec}&display=swap"

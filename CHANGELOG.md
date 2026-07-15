@@ -6,37 +6,36 @@ All notable changes to Kern are documented here. The format is based on
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-07-15
+
+### Added
+- **IBM Plex** font stack (SIL OFL 1.1, single steward): Plex Sans 400–700
+  (display + UI), Plex Mono 400–500 (labels). Latin + latin-ext woff2.
+- `assets/fonts/OFL-IBM-Plex.txt` + `FONTS.md` (attribution and redistributability).
+- **Form + feedback components** (standalone HTML):
+  - `checkbox.html`, `radio.html`, `select.html`, `textarea.html`
+  - `tabs.html` (ARIA tabs, keyboard Left/Right/Home/End)
+  - `alert.html` (default / strong / solid — monochrome feedback)
+- Research report: `docs/DESIGN_SYSTEMS_RESEARCH.md`.
+
+### Changed
+- Replaced Space Grotesk + Inter + JetBrains Mono with IBM Plex (clearer
+  single-steward licensing and documentation).
+- `tokens.css`, `DESIGN.md`, gallery type specimen, README, about, AGENTS.
+
+## [0.2.0] - 2026-07-15
+
 ### Added
 - **3-layer token model** (`tokens.css`): primitive gray ramp → semantic →
   component. Dark mode now re-binds only the semantic layer.
-- **Fluid type scale** via `clamp()` (viewport 320→1280px), replacing
-  fixed rem sizes.
-- **FOUC-free theming**: inline `<head>` script in `index.html` /
-  `about.html` re-applies a saved theme from `localStorage` before first paint;
-  gallery toggle now persists the choice.
-- **Built-in accessibility** in `tokens.css`: monochrome `:focus-visible`
-  ring (`2px solid var(--ink)` + offset) and a global `prefers-reduced-motion`
-  block that keeps focus/opacity but drops transforms.
-- **Icon a11y** in `icons.js`: decorative icons auto-`aria-hidden`;
-  icon-only buttons (with `aria-label`) stay exposed.
-- **P0 components** (one file each, standalone + runnable):
-  - `components/modal.html` — `role="dialog"` + `aria-modal`, focus trap,
-    Escape to close, focus restore.
-  - `components/toggle.html` — `role="switch"` + synced `aria-checked`.
-  - `components/table.html` — `aria-sort` sortable columns, keyboard sort.
-- Documentation: `TOKENS.md` (reference + contrast table), `CHANGELOG.md`,
-  `CONTRIBUTING.md`.
-
-### Changed
-- `AGENTS.md` and `DESIGN.md` updated to the 3-layer token model and the
-  new accessibility / theming rules.
-- Space Grotesk (display) + Inter (UI) + JetBrains Mono (labels) retained
-  as bundled woff2; variable-font + latin-subset recommended for future refresh.
+- **Fluid type scale** via `clamp()` (viewport 320→1280px).
+- **FOUC-free theming** and monochrome focus / reduced-motion guards.
+- Components: modal, toggle, table.
+- Docs: `TOKENS.md`, `CHANGELOG.md`, `CONTRIBUTING.md`.
 
 ## [0.1.0] - 2026-07-15
 
 ### Added
 - Initial Kern design system: monochrome, text-first, bundled offline fonts.
 - Five standalone components: button, card, input, badge, nav.
-- `DESIGN.md` (Google DESIGN.md spec), `AGENTS.md`, `index.html` gallery,
-  `about.html`, shared `assets/` (fonts, tokens, components.css, icons.js).
+- `DESIGN.md`, `AGENTS.md`, `index.html`, `about.html`, shared assets.

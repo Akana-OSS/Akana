@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kern · Radio</title>
+  <link rel="stylesheet" href="../assets/fonts.css">
+  <link rel="stylesheet" href="../assets/tokens.css">
+  <link rel="stylesheet" href="../assets/components.css">
+</head>
+<body class="kern">
+  <main class="k-demo">
+    <span class="k-label">Component</span>
+    <h1>Radio</h1>
+    <p class="lead">Single choice in a group. Selected state uses a thicker ink border ring — still monochrome. Native radio inputs; no JS required.</p>
+
+    <div class="k-stack" style="max-width: 420px;">
+      <section>
+        <div class="k-section-title">Plan</div>
+        <div class="k-choice-group" role="radiogroup" aria-label="Plan">
+          <label class="k-choice k-choice--radio">
+            <input type="radio" name="plan" value="free" checked>
+            <span class="k-choice__box"></span>
+            <span class="k-choice__text">Free
+              <span class="k-choice__hint">Personal use, one project.</span>
+            </span>
+          </label>
+          <label class="k-choice k-choice--radio">
+            <input type="radio" name="plan" value="pro">
+            <span class="k-choice__box"></span>
+            <span class="k-choice__text">Pro
+              <span class="k-choice__hint">Team seats and priority support.</span>
+            </span>
+          </label>
+          <label class="k-choice k-choice--radio">
+            <input type="radio" name="plan" value="enterprise" disabled>
+            <span class="k-choice__box"></span>
+            <span class="k-choice__text">Enterprise (unavailable)</span>
+          </label>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="../assets/icons.js"></script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 ---
-version: 0.2.0
+version: 0.3.0
 name: Kern
-description: Monochrome, text-first minimalist design system. Ink-on-paper, icon+text driven, no accent color, bundled local fonts.
+description: Monochrome, text-first minimalist design system. Ink-on-paper, icon+text driven, no accent color, bundled IBM Plex fonts (SIL OFL 1.1).
 colors:
   # --- Primitive gray ramp (theme-agnostic raw values) ---
   gray-0: "#FFFFFF"
@@ -30,25 +30,25 @@ colors:
   inverse-text: "{colors.gray-0}"
 typography:
   h1:
-    fontFamily: "Space Grotesk"
+    fontFamily: "IBM Plex Sans"
     fontSize: 3rem
     fontWeight: 700
     lineHeight: 1.12
     letterSpacing: "-0.02em"
   h2:
-    fontFamily: "Space Grotesk"
+    fontFamily: "IBM Plex Sans"
     fontSize: 1.75rem
     fontWeight: 500
     lineHeight: 1.2
     letterSpacing: "-0.02em"
   body-md:
-    fontFamily: "Inter"
+    fontFamily: "IBM Plex Sans"
     fontSize: 1rem
     fontWeight: 400
     lineHeight: 1.55
     letterSpacing: "0em"
   label:
-    fontFamily: "JetBrains Mono"
+    fontFamily: "IBM Plex Mono"
     fontSize: 0.6875rem
     fontWeight: 500
     lineHeight: 1.4
@@ -126,16 +126,17 @@ Dark mode mirrors the ramp exactly — paper becomes ink, ink becomes paper.
 
 ## Typography
 
-Three families, each with a clear job:
+Three families from a **single steward (IBM)**, all SIL OFL 1.1:
 
-- **Space Grotesk** — display & headings (500/700). Geometric, slightly tight.
-  Carries the brand's personality.
-- **Inter** — UI & body (400/500/600). Neutral, highly legible at small sizes.
-- **JetBrains Mono** — labels, meta, status (400/500). Uppercase, tracked-out
+- **IBM Plex Sans** — display & headings (500/700) and UI & body (400/500/600).
+  Hierarchy is weight, not a second family. Clean, corporate, highly legible.
+- **IBM Plex Mono** — labels, meta, status (400/500). Uppercase, tracked-out
   labels signal "system" / "metadata" without color.
 
-All three are **bundled locally** in `assets/fonts/` (woff2, latin + latin-ext
-so Turkish and other Latin-extended characters render). No CDN dependency.
+Both are **bundled locally** in `assets/fonts/` (woff2, latin + latin-ext
+so Turkish and other Latin-extended characters render). Full license text
+ships as `assets/fonts/OFL-IBM-Plex.txt`; see `FONTS.md`. No CDN dependency.
+Reserved Font Name: **"Plex"**.
 
 ## Layout
 
@@ -195,6 +196,14 @@ sharing `assets/tokens.css`, `assets/components.css`, `assets/fonts.css`, and
   state expressed by thumb motion, not color. `components/toggle.html`
 - **table** — sortable data; `aria-sort` columns with a visible glyph.
   Text, not color. `components/table.html`
+- **checkbox** — multi-select; ink fill + check. Native input. `components/checkbox.html`
+- **radio** — single choice; ink ring. Native radio group. `components/radio.html`
+- **select** — native `<select>` + monochrome chevron. `components/select.html`
+- **textarea** — multi-line field; same focus language as input. `components/textarea.html`
+- **tabs** — in-page panels; ink underline active state; arrow-key nav.
+  `components/tabs.html`
+- **alert** — feedback without hue (default / strong rail / solid invert).
+  `components/alert.html`
 
 Icons: mount with `<span class="k-icon" data-icon="name"></span>` or call
 `kern.icon('name')`. Available names are returned by `kern.icons()`.
