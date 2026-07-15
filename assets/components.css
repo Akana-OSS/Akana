@@ -345,6 +345,14 @@ body.akana {
   margin: 0 auto;
   padding: var(--space-12) var(--space-6) var(--space-20);
 }
+.ak-demo-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-8);
+}
 .ak-demo h1 {
   font-family: var(--font-display);
   font-weight: 700;

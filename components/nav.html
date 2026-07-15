@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("akana-theme");
+        if (t === "light" || t === "dark") {
+          document.documentElement.setAttribute("data-theme", t);
+        }
+      } catch (e) {}
+    })();
+  </script>
   <title>Akana · Nav</title>
   <link rel="stylesheet" href="../assets/fonts.css">
   <link rel="stylesheet" href="../assets/tokens.css">
@@ -10,6 +21,15 @@
 </head>
 <body class="akana">
   <main class="ak-demo">
+    <div class="ak-demo-bar">
+      <a class="ak-btn ak-btn--secondary ak-btn--sm" href="../index.html">
+        <span class="ak-icon" data-icon="arrow-left"></span> Gallery
+      </a>
+      <button class="ak-btn ak-btn--secondary ak-btn--sm" id="theme-btn" type="button" aria-pressed="false">
+        <span class="ak-icon" data-icon="moon"></span> Dark
+      </button>
+    </div>
+
     <span class="ak-label">Component</span>
     <h1>Nav</h1>
     <p class="lead">Icon-and-text navigation. The active item is marked by surface, not color. Works as tabs or a segmented control.</p>
@@ -47,7 +67,8 @@
     </div>
   </main>
   <script src="../assets/icons.js"></script>
-  <script>
+  <script src="../assets/theme.js"></script>
+<script>
     // Demo interaction: move aria-current on click.
     document.querySelectorAll('.ak-nav').forEach(function (nav) {
       nav.addEventListener('click', function (e) {
