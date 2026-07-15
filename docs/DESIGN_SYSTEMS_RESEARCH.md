@@ -252,14 +252,20 @@ Türetilmiş isimlerde “Plex” kullanılmıyor (unmodified bundle).
 
 | Claim | Kaynak | Seviye |
 |-------|--------|--------|
-| Tasarım sistemi erişimi olan tasarımcılar görevleri **%34 daha hızlı** bitiriyor (Figma data science) | Figma DS 104 metrics (2025) | B+ (şirket içi DS ekibi; metodoloji detayı sınırlı) |
-| Vanguard: design update’ler sistemle **%50 daha hızlı** | Figma blog (aktarım) | B/C |
-| Headspace: token/variable ile basit işlerde %20–30, karmaşıkta ~%50 zaman tasarrufu | Figma blog (aktarım) | B/C |
-| Swiggy: feature rollout süresi yarıya indi (tracking sonrası) | Figma blog (aktarım) | B/C |
-| athenahealth Forge: ~**100k component insertion / ay**; detachment rate bug/enhancement sinyali | Figma interview | B+ |
-| GOV.UK: yüzlerce servis, milyonlarca view; a11y baseline WCAG AA + progressive enhancement | GOV.UK a11y strategy | A |
-| USWDS: erişilebilir kamu siteleri için ortak toolkit (WCAG 2.1 AA hedefi) | designsystem.digital.gov | A |
-| Sistem **enforcement** olmadan tutarlılık vaadi bozulur (local optimization, carousel drift) | NN/g “Needs an Enforcer” 2026 | A |
+| Tasarım görevi süresi **−34%** (Figma A/B: aynı tasarımcılar, banking-app görevleri; ceiling: sistem task-relevant) | https://www.figma.com/blog/measuring-the-value-of-design-systems/ | A |
+| Form implementasyonu **−47%** dev süresi (Carbon; n=8, Sparkbox; scratch 4.2h medyan → Carbon 2.0h) | https://sparkbox.com/foundry/design_system_roi_impact_of_design_systems_business_value_carbon_design_system | B |
+| Vanguard / Headspace / Swiggy zaman tasarrufları (aktarım) | Figma DS 104 metrics blog | B/C |
+| athenahealth Forge: ~**100k component insertion / ay**; detachment = bug/enhancement sinyali | Figma Library Analytics interview | B+ |
+| GOV.UK: yüzlerce servis, milyonlarca view; WCAG AA; progressive enhancement; **sistem ≠ otomatik erişilebilir servis** | GOV.UK a11y strategy | A |
+| USWDS: erişilebilir kamu siteleri toolkit (WCAG 2.1 AA) | designsystem.digital.gov | A |
+| Enforcement yoksa tutarlılık bozulur | NN/g “Needs an Enforcer” 2026 | A |
+| Otomatik a11y araçları ~%30 issue yakalar (GDS 2017) | GOV.UK a11y strategy | A |
+
+#### Subagent ek (dalga 2 leaf SQ3)
+
+- **Enablement > pure enforcement:** docs, copy-paste, live examples; GOV.UK contribution model.
+- **ROI aggregates** (yüzlerce % ROI, Lloyds vb.) çoğu **C** — primary bağlanmadıkça kullanma.
+- **Kern risk:** mini-Material ansiklopedisi olmak; v0.3+ iteratif ürün. Pareto: yüksek frekans pattern’ler önce.
 
 #### Adoption nasıl tanımlanıyor? (Omlet / Curtis / leaders)
 
@@ -363,6 +369,13 @@ Style Dictionary (resmi): token’lar *platform-agnostic input*; CSS/iOS/Android
 | ✅ Component tokens only as needed | Mevcut: button-like vars in components.css local `--_bg` |
 | ❌ Full DTCG JSON export (şimdi) | Defer until second platform or Figma sync |
 
+#### Subagent ek (dalga 2 leaf SQ4)
+
+- DTCG 2025.10 = **interchange** (Final CG Report, W3C Rec track değil); browser runtime değil.
+- Style Dictionary `outputReferences: true` → üretilen CSS hâlâ `var(--primitive)` zinciri tutar (AlwaysTwisted).
+- Küçük/tek ürün: **component tier atlanabilir**; enterprise/multi-brand’te 3 tier.
+- Pipeline eşiği: ≥2 platform, Figma→repo otomasyon, multi-brand, büyük token graph validation.
+
 ---
 
 ### Dalga 2 → SQ6 teyit
@@ -397,6 +410,8 @@ v0.3 uygulaması dalga 2 ile **çelişmiyor**:
 | SD1 | https://styledictionary.com/info/tokens/ | A |
 | GP1 | https://goodpractices.design/articles/design-tokens | B |
 | USW1 | https://designsystem.digital.gov/documentation/accessibility/ | A |
+| FIG2 | https://www.figma.com/blog/measuring-the-value-of-design-systems/ | A |
+| SPB1 | https://sparkbox.com/foundry/design_system_roi_impact_of_design_systems_business_value_carbon_design_system | B |
 
 ---
 
@@ -407,4 +422,4 @@ v0.3 uygulaması dalga 2 ile **çelişmiyor**:
 - [x] Çelişki belirtildi (Material motion/color vs Kern; SQ5 RFN vs Plex seçimi)  
 - [x] Kern çıkarımları mevcut kodla hizalı  
 - [x] Dalga 2 SQ3/SQ4 parent sentezi eklendi  
-- [ ] Dalga 2 subagent özetleri (async merge when complete)
+- [x] Dalga 2 subagent özetleri merge edildi
