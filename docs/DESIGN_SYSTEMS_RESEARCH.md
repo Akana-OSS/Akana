@@ -244,6 +244,137 @@ Türetilmiş isimlerde “Plex” kullanılmıyor (unmodified bundle).
 
 ---
 
+## 12. Dalga 2 — SQ3 UX etkililiği + SQ4 token mimarisi
+
+### SQ3 — Ne ölçülüyor, ne “işe yarıyor”?
+
+#### Kanıtlı faydalar (ölçüm / gözlem)
+
+| Claim | Kaynak | Seviye |
+|-------|--------|--------|
+| Tasarım sistemi erişimi olan tasarımcılar görevleri **%34 daha hızlı** bitiriyor (Figma data science) | Figma DS 104 metrics (2025) | B+ (şirket içi DS ekibi; metodoloji detayı sınırlı) |
+| Vanguard: design update’ler sistemle **%50 daha hızlı** | Figma blog (aktarım) | B/C |
+| Headspace: token/variable ile basit işlerde %20–30, karmaşıkta ~%50 zaman tasarrufu | Figma blog (aktarım) | B/C |
+| Swiggy: feature rollout süresi yarıya indi (tracking sonrası) | Figma blog (aktarım) | B/C |
+| athenahealth Forge: ~**100k component insertion / ay**; detachment rate bug/enhancement sinyali | Figma interview | B+ |
+| GOV.UK: yüzlerce servis, milyonlarca view; a11y baseline WCAG AA + progressive enhancement | GOV.UK a11y strategy | A |
+| USWDS: erişilebilir kamu siteleri için ortak toolkit (WCAG 2.1 AA hedefi) | designsystem.digital.gov | A |
+| Sistem **enforcement** olmadan tutarlılık vaadi bozulur (local optimization, carousel drift) | NN/g “Needs an Enforcer” 2026 | A |
+
+#### Adoption nasıl tanımlanıyor? (Omlet / Curtis / leaders)
+
+1. **Erken aşama (binary):** Sistem *kullanılıyor mu?* Granüler metrik henüz değersiz.
+2. **Olgun aşama:** *Kim, nerede, nasıl* kullanıyor? (Nathan Curtis: what → who/how → action)
+3. **Doğru kullanım:** Saf count yetmez; “intended use” (PJ Onori) — quantitative + qualitative.
+
+**Metrik seti (pratik):**
+
+| Metrik | Ne söyler |
+|--------|-----------|
+| Component / token usage count | Breadth |
+| Visual coverage (% UI from system) | User-facing adoption |
+| Detach / override rate | Gap or bug signal |
+| Legacy vs current version | Migration health |
+| Docs page hits / search queries | Discoverability |
+| Contribution / office hours | Community health |
+| A11y audit regressions | Quality |
+| Time-to-ship (feature) | Business impact |
+
+#### Başarı faktörleri
+
+1. **A11y embedded** (GOV.UK, USWDS) — kullanıcı etkisi doğrudan  
+2. **Enforcement + contribution path** (NN/g) — “yes to the right things”  
+3. **Ölç → aksiyon** (Curtis) — dashboard için dashboard değil  
+4. **Basitlik** (Feo/Omlet: kill complexity) — over-engineered kit adoption öldürür  
+5. **Code + design parity** — sadece Figma kit yetmez (Meta Davy Fung)  
+6. **İş hedeflerine hizalama** (Dan Mall)
+
+#### Başarısızlık modları
+
+| Mod | Belirti |
+|-----|---------|
+| No enforcer | Her takım kendi varyantı |
+| Overbuild | “Her senaryo için button” → kimse kullanmaz |
+| Kit-only | Görsel tutarlı, davranış/a11y yok |
+| Measure-only vanity | Sayı var, migration/fix yok |
+| Binary adoption ignored | V1’de premature analytics |
+| “Components a11y ⇒ product a11y” | GOV.UK: yanlış varsayım |
+
+#### Kern için SQ3 çıkarımları (küçük / offline / monochrome)
+
+1. **Binary adoption şimdilik yeterli:** `components/*.html` açılıyor mu, gallery link’leri var mı.  
+2. **Ölçülebilir “UX kalitesi” proxy’leri:** contrast table (TOKENS.md), focus-visible, `check_icons.js`, lint DESIGN.md, 0 console error.  
+3. **Detach analogu:** hardcoded hex/spacing = “detachment” — AGENTS kuralı + code review.  
+4. **Doğru kullanım:** monochrome state (weight/border) dokümante; alert/toggle örnekleri pattern.  
+5. **Enforcer:** CONTRIBUTING + AGENTS + agent skill (kern-design-system) — “3+ use case → system”.  
+6. **Aşırı metrik yok:** Omlet/Figma Library Analytics ölçeği Kern için overhead.
+
+---
+
+### SQ4 — Token mimarisi etkililiği
+
+#### 3-katman modeli (endüstri kanıtı)
+
+| Katman | İsimler | Rol |
+|--------|---------|-----|
+| 1 | Primitive / base / global | Ham değer (`gray-200`, `#0A0A0A`) |
+| 2 | Semantic / alias / decision | Niyet (`--text`, `--border`) |
+| 3 | Component (ihtiyaca) | Component-scoped (`button-bg`) |
+
+Kaynaklar: Contentful (2024), goodpractices.design, Penpot (2025), Nathan Curtis option→decision→component geleneği.
+
+**Dark mode pattern (kanıtlanmış):** Mode = semantic rebind; primitive sabit. CSS:
+
+```css
+:root { --text: var(--gray-850); }
+[data-theme="dark"] { --text: #ededed; }
+```
+
+#### Tokens vs CSS variables
+
+| | Design tokens (DTCG/JSON) | CSS custom properties |
+|--|---------------------------|------------------------|
+| Rol | Platform-agnostic karar | Web implementasyonu |
+| Exchange | DTCG Format 2025.10 | Tarayıcı runtime |
+| Multi-platform | Style Dictionary transform | Web-only |
+| Theming | Alias + modes | Cascade + `:root` / `[data-theme]` |
+| Build | Genelde build gerekir | Zero-build mümkün |
+
+Style Dictionary (resmi): token’lar *platform-agnostic input*; CSS/iOS/Android *output*. Forward-compatible with DTCG.
+
+#### Ne zaman pipeline gerekir?
+
+| Durum | Öneri |
+|-------|--------|
+| Tek platform web, offline, zero-build (Kern) | **Pure CSS 3-layer** — yeterli |
+| Web + iOS + Android + Figma sync | JSON + Style Dictionary / Tokens Studio |
+| Multi-brand (N brand × 1 kit) | Semantic + selective component tokens + modes |
+| Tek tema, 5 component | Primitive-only bile yetebilir — semantic hâlâ a11y/tema için değerli |
+
+**Over-engineering riski (Reddit DS community + Contentful):** component-token şişmesi, “subtle-secondary-background-hover” grid patlaması. Contentful: *design systems are as much about not defining things*.
+
+#### Kern SQ4 kararı (doğrulandı)
+
+| Karar | Gerekçe |
+|-------|---------|
+| ✅ 3-layer CSS in `tokens.css` | Endüstri standardı, dark = semantic only |
+| ✅ No Style Dictionary | Tek consumer web; zero-build invariant |
+| ✅ DESIGN.md SSOT + lint | Machine-readable without pipeline |
+| ✅ Component tokens only as needed | Mevcut: button-like vars in components.css local `--_bg` |
+| ❌ Full DTCG JSON export (şimdi) | Defer until second platform or Figma sync |
+
+---
+
+### Dalga 2 → SQ6 teyit
+
+v0.3 uygulaması dalga 2 ile **çelişmiyor**:
+- Yeni form components = adoption surface (binary → richer kit)
+- IBM Plex OFL = license clarity (SQ5)
+- Token model = SQ4 best practice for single-web
+- A11y focus/contrast = SQ3 en güçlü UX kanıt hattı (GOV.UK/USWDS/NN/g)
+
+---
+
 ## 10. Kaynaklar (seçilmiş)
 
 | ID | Kaynak | Seviye |
@@ -261,6 +392,11 @@ Türetilmiş isimlerde “Plex” kullanılmıyor (unmodified bundle).
 | OFL-J | https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/OFL.txt | A |
 | OFL-P | https://raw.githubusercontent.com/IBM/plex/master/LICENSE.txt | A |
 | OFL-S | https://github.com/floriankarsten/space-grotesk/blob/master/OFL.txt | A |
+| FIG1 | https://www.figma.com/blog/design-systems-104-making-metrics-matter/ | B+ |
+| OML1 | https://omlet.dev/blog/how-leaders-measure-design-system-adoption/ | B+ |
+| SD1 | https://styledictionary.com/info/tokens/ | A |
+| GP1 | https://goodpractices.design/articles/design-tokens | B |
+| USW1 | https://designsystem.digital.gov/documentation/accessibility/ | A |
 
 ---
 
@@ -268,6 +404,7 @@ Türetilmiş isimlerde “Plex” kullanılmıyor (unmodified bundle).
 
 - [x] Claim’ler birincil veya A/B kaynaklı  
 - [x] Font lisansları raw LICENSE ile doğrulandı  
-- [x] Çelişki belirtildi (Material motion/color vs Kern)  
+- [x] Çelişki belirtildi (Material motion/color vs Kern; SQ5 RFN vs Plex seçimi)  
 - [x] Kern çıkarımları mevcut kodla hizalı  
-- [ ] Subagent secondary synthesis (opsiyonel merge)
+- [x] Dalga 2 SQ3/SQ4 parent sentezi eklendi  
+- [ ] Dalga 2 subagent özetleri (async merge when complete)
