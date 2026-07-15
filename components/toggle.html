@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kern · Toggle</title>
+  <link rel="stylesheet" href="../assets/fonts.css">
+  <link rel="stylesheet" href="../assets/tokens.css">
+  <link rel="stylesheet" href="../assets/components.css">
+</head>
+<body class="kern">
+  <main class="k-demo">
+    <span class="k-label">Component</span>
+    <h1>Toggle</h1>
+    <p class="lead">A binary on/off control. Built on the native checkbox with <code>role="switch"</code> so screen readers announce it correctly. State comes from the thumb sliding — no color.</p>
+
+    <div class="k-stack" style="max-width: 420px;">
+      <label class="k-toggle">
+        <input type="checkbox" role="switch" aria-checked="false" checked>
+        <span class="k-toggle__track" aria-hidden="true"><span class="k-toggle__thumb"></span></span>
+        <span class="k-toggle__label">Compact density</span>
+      </label>
+
+      <label class="k-toggle">
+        <input type="checkbox" role="switch" aria-checked="false">
+        <span class="k-toggle__track" aria-hidden="true"><span class="k-toggle__thumb"></span></span>
+        <span class="k-toggle__label">Email notifications</span>
+      </label>
+
+      <label class="k-toggle">
+        <input type="checkbox" role="switch" aria-checked="false" disabled>
+        <span class="k-toggle__track" aria-hidden="true"><span class="k-toggle__thumb"></span></span>
+        <span class="k-toggle__label" style="color: var(--text-muted);">Offline (locked)</span>
+      </label>
+    </div>
+  </main>
+
+  <script src="../assets/icons.js"></script>
+  <script>
+    // Keep aria-checked in sync with the native checkbox state.
+    document.querySelectorAll('.k-toggle input').forEach(function (el) {
+      var sync = function () { el.setAttribute('aria-checked', el.checked ? 'true' : 'false'); };
+      el.addEventListener('change', sync);
+      sync();
+    });
+  </script>
+</body>
+</html>

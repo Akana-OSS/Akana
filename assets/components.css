@@ -243,6 +243,102 @@ body.kern {
   outline-offset: 2px;
 }
 
+/* ---------- Toggle / Switch (role="switch") ---------- */
+.k-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-ui);
+  font-size: var(--fs-sm);
+  color: var(--text);
+  cursor: pointer;
+  user-select: none;
+}
+.k-toggle input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.k-toggle__track {
+  position: relative;
+  width: 40px; height: 22px;
+  border: var(--border-w) solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  transition: background var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease);
+  flex: none;
+}
+.k-toggle__thumb {
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 16px; height: 16px;
+  border-radius: var(--radius-pill);
+  background: var(--text-muted);
+  transition: transform var(--dur-fast) var(--ease),
+              background var(--dur-fast) var(--ease);
+}
+.k-toggle input:checked + .k-toggle__track { background: var(--ink); border-color: var(--ink); }
+.k-toggle input:checked + .k-toggle__track .k-toggle__thumb {
+  transform: translateX(18px);
+  background: var(--inverse-text);
+}
+.k-toggle input:focus-visible + .k-toggle__track {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+.k-toggle__label { color: var(--text-secondary); }
+.k-toggle input:checked ~ .k-toggle__label { color: var(--text); }
+
+/* ---------- Modal / Dialog ---------- */
+.k-modal__overlay {
+  position: fixed; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--space-6);
+  background: rgba(10, 10, 10, 0.5);
+  z-index: 50;
+}
+.k-modal {
+  background: var(--bg);
+  border: var(--border-w) solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  max-width: 440px; width: 100%;
+  box-shadow: var(--shadow-md);
+}
+.k-modal__title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-xl);
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 var(--space-3);
+  color: var(--ink);
+}
+.k-modal__body { margin: 0 0 var(--space-6); color: var(--text-secondary); font-size: var(--fs-sm); }
+.k-modal__actions { display: flex; justify-content: flex-end; gap: var(--space-3); }
+.k-modal[hidden], .k-modal__overlay[hidden] { display: none; }
+
+/* ---------- Table ---------- */
+.k-table-wrap { overflow-x: auto; border: var(--border-w) solid var(--border); border-radius: var(--radius-lg); }
+.k-table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+.k-table caption {
+  text-align: left; padding: var(--space-4) var(--space-5);
+  font-family: var(--font-mono); font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-label); text-transform: uppercase;
+  color: var(--text-muted);
+}
+.k-table th, .k-table td {
+  text-align: left; padding: var(--space-4) var(--space-5);
+  border-bottom: var(--border-w) solid var(--border);
+}
+.k-table thead th {
+  font-family: var(--font-mono); font-weight: 500; font-size: var(--fs-2xs);
+  letter-spacing: var(--tracking-label); text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.k-table tbody tr:last-child td { border-bottom: 0; }
+.k-table tbody tr:hover { background: var(--surface); }
+.k-table th[aria-sort] { cursor: pointer; user-select: none; }
+.k-table th[aria-sort] .k-sort { color: var(--text-muted); margin-left: var(--space-2); }
+.k-table th[aria-sort="ascending"] .k-sort,
+.k-table th[aria-sort="descending"] .k-sort { color: var(--ink); }
+
 /* ---------- Demo scaffolding only (gallery / standalone) ---------- */
 .k-demo {
   max-width: var(--maxw);

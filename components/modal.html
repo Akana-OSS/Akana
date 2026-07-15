@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kern · Modal</title>
+  <link rel="stylesheet" href="../assets/fonts.css">
+  <link rel="stylesheet" href="../assets/tokens.css">
+  <link rel="stylesheet" href="../assets/components.css">
+</head>
+<body class="kern">
+  <main class="k-demo">
+    <span class="k-label">Component</span>
+    <h1>Modal</h1>
+    <p class="lead">A dialog that traps focus, closes on Escape, and restores focus to the trigger on close. Uses <code>role="dialog"</code>, <code>aria-modal</code>, and a labelled heading.</p>
+
+    <div class="k-row">
+      <button class="k-btn k-btn--secondary" type="button" id="open-modal">
+        <span class="k-icon" data-icon="plus"></span> New item
+      </button>
+    </div>
+
+    <!-- Modal -->
+    <div class="k-modal__overlay" id="overlay" hidden>
+      <div class="k-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" id="modal">
+        <h2 class="k-modal__title" id="modal-title">New item</h2>
+        <p class="k-modal__body">Give the item a name. This is a minimal, monochrome dialog — no color cues, just type and spacing.</p>
+        <div class="k-field" style="margin-bottom: var(--space-6);">
+          <label class="k-field__label" for="modal-name">Name</label>
+          <div class="k-input">
+            <span class="k-icon" data-icon="tag"></span>
+            <input id="modal-name" type="text" placeholder="Item name" autocomplete="off">
+          </div>
+        </div>
+        <div class="k-modal__actions">
+          <button class="k-btn k-btn--ghost" type="button" id="cancel-modal">Cancel</button>
+          <button class="k-btn" type="button" id="confirm-modal">Create</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../assets/icons.js"></script>
+  <script>
+    (function () {
+      var overlay = document.getElementById('overlay');
+      var modal = document.getElementById('modal');
+      var openBtn = document.getElementById('open-modal');
+      var cancelBtn = document.getElementById('cancel-modal');
+      var nameInput = document.getElementById('modal-name');
+      var lastFocused = null;
+
+      function getFocusable() {
+        return modal.querySelectorAll(
+          'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+      }
+      function open() {
+        lastFocused = document.activeElement;
+        overlay.hidden = false;
+        document.addEventListener('keydown', onKeydown);
+        nameInput.focus();
+      }
+      function close() {
+        overlay.hidden = true;
+        document.removeEventListener('keydown', onKeydown);
+        if (lastFocused) lastFocused.focus();
+      }
+      function onKeydown(e) {
+        if (e.key === 'Escape') { close(); return; }
+        if (e.key === 'Tab') {
+          var f = getFocusable();
+          if (!f.length) return;
+          var first = f[0], last = f[f.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      }
+      // Click on the overlay (outside the dialog) closes.
+      overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+      openBtn.addEventListener('click', open);
+      cancelBtn.addEventListener('click', close);
+      document.getElementById('confirm-modal').addEventListener('click', close);
+    })();
+  </script>
+</body>
+</html>

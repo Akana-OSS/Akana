@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kern · Table</title>
+  <link rel="stylesheet" href="../assets/fonts.css">
+  <link rel="stylesheet" href="../assets/tokens.css">
+  <link rel="stylesheet" href="../assets/components.css">
+</head>
+<body class="kern">
+  <main class="k-demo">
+    <span class="k-label">Component</span>
+    <h1>Table</h1>
+    <p class="lead">Data as text, not color. Sortable columns use <code>aria-sort</code> and a visible glyph. Hierarchy is type and the row divider — nothing else.</p>
+
+    <div class="k-table-wrap">
+      <table class="k-table" id="demo-table">
+        <caption>Recent items</caption>
+        <thead>
+          <tr>
+            <th aria-sort="ascending" data-key="name" tabindex="0" role="columnheader">
+              Name <span class="k-sort" aria-hidden="true">↑</span>
+            </th>
+            <th aria-sort="none" data-key="type" tabindex="0" role="columnheader">
+              Type <span class="k-sort" aria-hidden="true"></span>
+            </th>
+            <th aria-sort="none" data-key="size" tabindex="0" role="columnheader">
+              Size <span class="k-sort" aria-hidden="true"></span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Alpha report</td><td>Document</td><td>12 KB</td></tr>
+          <tr><td>Beta sheet</td><td>Spreadsheet</td><td>48 KB</td></tr>
+          <tr><td>Gamma note</td><td>Note</td><td>3 KB</td></tr>
+          <tr><td>Delta index</td><td>Index</td><td>21 KB</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="../assets/icons.js"></script>
+  <script>
+    (function () {
+      var table = document.getElementById('demo-table');
+      var headCells = table.querySelectorAll('thead th[data-key]');
+      var tbody = table.querySelector('tbody');
+      var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+      var glyphs = { ascending: '↑', descending: '↓', none: '' };
+
+      function sizeToNum(s) { return parseInt(s, 10) || 0; }
+      function colIndex(key) {
+        var i = 1;
+        headCells.forEach(function (c, idx) { if (c.dataset.key === key) i = idx + 1; });
+        return i;
+      }
+      function sortBy(key, dir) {
+        var n = colIndex(key);
+        var sorted = rows.slice().sort(function (a, b) {
+          var av = a.querySelector('td:nth-child(' + n + ')').textContent.trim();
+          var bv = b.querySelector('td:nth-child(' + n + ')').textContent.trim();
+          var cmp = (key === 'size') ? sizeToNum(av) - sizeToNum(bv) : av.localeCompare(bv);
+          return dir === 'ascending' ? cmp : -cmp;
+        });
+        sorted.forEach(function (r) { tbody.appendChild(r); });
+      }
+      function setSort(key, dir) {
+        headCells.forEach(function (c) {
+          if (c.dataset.key === key) {
+            c.setAttribute('aria-sort', dir);
+            c.querySelector('.k-sort').textContent = glyphs[dir];
+          } else {
+            c.setAttribute('aria-sort', 'none');
+            c.querySelector('.k-sort').textContent = '';
+          }
+        });
+      }
+      headCells.forEach(function (cell) {
+        var key = cell.dataset.key;
+        var toggle = function () {
+          var current = cell.getAttribute('aria-sort');
+          var next = current === 'ascending' ? 'descending' : 'ascending';
+          setSort(key, next);
+          sortBy(key, next);
+        };
+        cell.addEventListener('click', toggle);
+        cell.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -58,6 +58,9 @@ Kern/
   |    input.html
   |    badge.html
   |    nav.html
+  |    modal.html
+  |    toggle.html
+  |    table.html
   |  scripts/
   |    download_fonts.py  # re-bundle fonts if needed
   |    check_icons.js     # verify every used icon exists

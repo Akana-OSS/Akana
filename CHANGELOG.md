@@ -19,6 +19,11 @@ All notable changes to Kern are documented here. The format is based on
   block that keeps focus/opacity but drops transforms.
 - **Icon a11y** in `icons.js`: decorative icons auto-`aria-hidden`;
   icon-only buttons (with `aria-label`) stay exposed.
+- **P0 components** (one file each, standalone + runnable):
+  - `components/modal.html` — `role="dialog"` + `aria-modal`, focus trap,
+    Escape to close, focus restore.
+  - `components/toggle.html` — `role="switch"` + synced `aria-checked`.
+  - `components/table.html` — `aria-sort` sortable columns, keyboard sort.
 - Documentation: `TOKENS.md` (reference + contrast table), `CHANGELOG.md`,
   `CONTRIBUTING.md`.
 

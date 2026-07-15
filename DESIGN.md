@@ -189,6 +189,12 @@ sharing `assets/tokens.css`, `assets/components.css`, `assets/fonts.css`, and
   stand out. `components/badge.html`
 - **nav** — icon + text segmented navigation; active state by surface, not color.
   `components/nav.html`
+- **modal** — dialog with focus trap, Escape to close, focus restore to
+  trigger. `role="dialog"` + `aria-modal`. `components/modal.html`
+- **toggle** — on/off switch via `role="switch"` + synced `aria-checked`;
+  state expressed by thumb motion, not color. `components/toggle.html`
+- **table** — sortable data; `aria-sort` columns with a visible glyph.
+  Text, not color. `components/table.html`
 
 Icons: mount with `<span class="k-icon" data-icon="name"></span>` or call
 `kern.icon('name')`. Available names are returned by `kern.icons()`.
